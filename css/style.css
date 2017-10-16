@@ -1,5 +1,15 @@
 body#body{
   font-family: 'Open Sans', sans-serif;
+  font-weight: lighter;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+#body .pure-button:hover{
+  background:white;
+}
+.flex-main{
+  flex: 1;
 }
 #body .pure-g{
   width: 1200px;
@@ -19,6 +29,16 @@ body#body{
 header .container{
   height: 40px;
 }
+
+#body header .pure-button{
+  border-radius: 0;
+  border: 1px solid #424242;
+  background-color:white;
+  height: 40px;
+}
+#body header .pure-menu-button:hover{
+  background: white;
+}
 .home-menu {
     padding: 0.5em;
     text-align: center;
@@ -32,6 +52,9 @@ header .pure-menu-heading{
   font-size: 30px;
   padding: 0;
 
+}
+.centered{
+  text-align:center;
 }
 .home-menu {
     text-align: left;
@@ -47,13 +70,20 @@ header .pure-menu-heading{
   color: #6400e3;
   font-style: normal;
   margin-top:100px;
+  font-family: 'Merriweather', serif;
+  font-weight: 100;
+}
+.pitch h1.underline{
+  width:80px;
+  margin:20px 0 5px 0;
+  border-bottom:5px solid #6400e3;
 }
 
 .pitch p{
-  color: #777;
-  margin-top:20px;
-  font-size:1em;
+  color: #424242;
+  font-size: 16px;
   font-family: 'Open Sans', sans-serif;
+  line-height: 24px;
   font-weight:lighter;
 }
 .colored{
@@ -66,9 +96,23 @@ header .pure-menu-heading{
   box-shadow: none;
   font-weight:lighter;
 }
+#body form input, #body form .pure-button{
+  border-radius:0px;
+}
+#body form .pure-button{
+  background-color: white;
+  border:1px solid #6400e3;
+  color:#6400e3;
+}
 
 footer{
-  background-color: #424242;
+  -webkit-box-shadow: inset 0px 2px 6px 0px rgba(0,0,0,0.15);
+  -moz-box-shadow: inset 0px 2px 6px 0px rgba(0,0,0,0.15);
+  box-shadow: inset 0px 2px 6px 0px rgba(0,0,0,0.15);
+  background-color: #dedede;
   width: 100%;
-  height:40px;
+  height:60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
