@@ -229,8 +229,8 @@ queue()
   		d3.selectAll("#flyer" + i).attr("stroke-dasharray", totalLength + " " + totalLength)
   		  .attr("stroke-dashoffset", totalLength)
   		  .transition()
-  		  .duration(5000)
-  		  // .delay(100*i)
+  		  .duration(4000)
+  		  .delay(80*i)
   		  .attr("stroke-dashoffset", 0)
   		  .style("stroke-width",1)
 	})
@@ -239,8 +239,8 @@ queue()
   		d3.selectAll("#arc" + i).attr("stroke-dasharray", totalLength + " " + totalLength)
   		  .attr("stroke-dashoffset", totalLength)
   		  .transition()
-  		  .duration(5000)
-  		  // .delay(300*i)
+  		  .duration(4000)
+  		  .delay(80*i)
   		  .attr("stroke-dashoffset", 0)
   		  .style("stroke-width",1)
 	})
@@ -266,7 +266,7 @@ queue()
 
 function refresh(){
   d3.timer(function(elapsed) {
-    if (elapsed > 5000){
+    if (elapsed > 4000 + links.length * 80){
       // get current time
       if (!dragging){
         let current = projection.rotate();
