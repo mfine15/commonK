@@ -2,7 +2,11 @@
 .arcs {
   opacity:.1;
   stroke: gray;
-  stroke-width: 3;
+  stroke-width: 1;
+}
+.sphere{
+  background-color: white;
+  z-index: 2;
 }
 .flyers {
   stroke-width:1;

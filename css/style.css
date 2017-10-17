@@ -14,9 +14,7 @@ body#body{
 #body .pure-g{
   width: 1200px;
 }
-.pure-button-primary{
-  background-color:#6400e3;
-}
+
 .container{
   max-width: 1080px;
   margin:0 auto 20px auto;
@@ -36,16 +34,21 @@ header .container{
   background-color:white;
   height: 40px;
 }
+
+#globe{
+  padding-top: 50px;
+}
+
 #body header .pure-menu-button:hover{
   background: white;
 }
 .home-menu {
     padding: 0.5em;
     text-align: center;
-    /*box-shadow: 0 1px 1px rgba(0,0,0, 0.10);*/
     height:60px;
-    box-shadow: none;
     color: #424242;
+    background: white;
+    box-shadow: 0 1px 0 0 rgba(0,0,0,0.066);
 }
 header .pure-menu-heading{
   text-transform: none;
@@ -54,7 +57,6 @@ header .pure-menu-heading{
 
 }
 .centered{
-  text-align:center;
 }
 .home-menu {
     text-align: left;
@@ -63,6 +65,10 @@ header .pure-menu-heading{
 }
 .home-menu ul {
     float: right;
+    color: #3a3a3a;
+    font-size: 13px;
+    font-weight: 600;
+    margin-top: 5px;
 }
 .pitch h1{
   font-size: 3em;
@@ -83,7 +89,7 @@ header .pure-menu-heading{
   color: #424242;
   font-size: 16px;
   font-family: 'Open Sans', sans-serif;
-  line-height: 24px;
+  line-height: 32px;
   font-weight:lighter;
 }
 .colored{
@@ -96,23 +102,38 @@ header .pure-menu-heading{
   box-shadow: none;
   font-weight:lighter;
 }
-#body form input, #body form .pure-button{
-  border-radius:0px;
-}
+
 #body form .pure-button{
   background-color: white;
-  border:1px solid #6400e3;
+  border:2px solid #6400e3;
   color:#6400e3;
+  width:200px;
+  height:50px;
+  border-radius: 0px;
+  display:block;
+  margin:0 auto;
+}
+#body form .pure-button:hover{
+  background-color: #6400e3;
+  border:2px solid #6400e3;
+  color:white;
+  width:200px;
+  height:50px;
+  border-radius: 0px;
 }
 
 footer{
   -webkit-box-shadow: inset 0px 2px 6px 0px rgba(0,0,0,0.15);
   -moz-box-shadow: inset 0px 2px 6px 0px rgba(0,0,0,0.15);
   box-shadow: inset 0px 2px 6px 0px rgba(0,0,0,0.15);
-  background-color: #dedede;
+  background-color: #eeeeee;
   width: 100%;
   height:60px;
   display: flex;
   align-items: center;
   justify-content: center;
+  color: #3a3a3a;
+  font-size: 13px;
+  font-weight: 600;
+  margin-top: 5px;
 }
