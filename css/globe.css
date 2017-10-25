@@ -1,48 +1,52 @@
-
 .arcs {
-  opacity:.1;
+  opacity: .1;
   stroke: gray;
-  stroke-width: 1;
-}
-.sphere{
+  stroke-width: 1; }
+
+.sphere {
   background-color: white;
-  z-index: 2;
-}
-.flyers {
-  stroke-width:1;
+  z-index: 2; }
+
+.flyer {
+  stroke-width: 1;
   opacity: .6;
-  stroke: #6400e3;
-}
+  stroke: #6400e3; }
+
+.unfocused {
+  stroke: gray; }
+
+.focused {
+  stroke: red; }
+
 .arc, .flyer {
   stroke-linejoin: round;
-  fill:none;
-}
-  .arc { }
-  .flyer { }
-  .flyer:hover { }
+  fill: none; }
 
 h1 {
-   font: italic bold 2.2em Lora;
-   color: #BBB;
-   margin: 0px;
-}
+  font: italic bold 2.2em Lora;
+  color: #BBB;
+  margin: 0px; }
 
 p {
-   margin-top: 1.2em;
-   margin-bottom: 0.3em;
-   font: 1em Muli;
-   color: #BBB;
-}
+  /* margin-top: 1.2em; */
+  /* margin-bottom: 0.3em; */
+  font: 1em Muli;
+  color: #BBB;
+  }
 
 controls {
-   width:220px;
-   position: absolute;
-   padding:10px;
-}
+  width: 220px;
+  position: absolute;
+  padding: 10px; }
 
 .graticule {
   fill: none;
   stroke: #777;
   stroke-width: .5px;
-  stroke-opacity: .5;
-}
+  stroke-opacity: .5; }
+
+.tingle-modal-box form {
+  /* margin: 0 auto; */
+  }
+
+/*# sourceMappingURL=globe.css.map */

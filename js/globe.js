@@ -28,13 +28,17 @@ var swoosh = d3.line()
      .x(function(d) { return d[0] })
      .y(function(d) { return d[1] })
      .curve(d3.curveCardinal);
+
+// function swoosh([x,y,z]){
+//   return path({type: "LineString", coordinates: [x, z]});
+// }
 var arc = d3.line()
      .x(function(d) { return d[0] })
      .y(function(d) { return d[1] })
     //  .tension(.0);
-function flying_arc(pts) {
-  var source = pts.coords[0],
-      target = pts.coords[1];
+function flying_arc([a,b]) {
+  var source = a.geometry.coordinates;
+  var target = b.geometry.coordinates
   // get canvas coords of arc midpoint and globe center
   var mid = projection(location_along_arc(source, target, .5));
   var ctr = projection.translate();
@@ -49,6 +53,57 @@ function flying_arc(pts) {
                  mid,
                  projection(target) ]
   return result;
+}
+
+class Graph{
+  constructor(data, nodes, connectivity){
+    this.adjacency = {};
+    this.edges = [];
+    this.centerIds = {};
+    this.nodes = [];
+    this.travelPath = [];
+
+    let centers = _.sampleSize(data.features, nodes);
+    this.nodes = centers;
+    this.center = _.sample(centers);
+    // For visualization, want a subset of connected nodes but beyond that need to fill stuff in
+    for (let c of centers){
+      this.centerIds[c.id] = c;
+      this.adjacency[c.id] = [];
+      let connections = Math.round(connectivity * _.random(1, 1.5));
+      let dests = _.sampleSize(centers, connections);
+      for (let dest of dests){
+        this.edges.push([c, dest]);
+        this.adjacency[c.id].push([c, dest]);
+      }
+    };
+  }
+  get activeEdges(){
+    return this.adjacency[this.center.id];
+  }
+  get inactiveEdges(){
+    return _.without(this.edges, this.activeEdges);
+  }
+  get currentCoords(){
+    return this.center.geometry.coordinates
+  }
+  static flyerId([source,dest]){
+    return `#flyer-${source.id}-${dest.id}`
+  }
+  get travelPathId(){
+    return `#flyer-${this.travelPath[0]}-${this.travelPath[1]}`
+  }
+  recenter(){
+    // let centrals = _.without(Object.keys(this.centerIds), this.center.id);
+    let neighbours = _.map(_.uniq(_.flatten(this.activeEdges)), o => ""+o.id);
+    // let possibleNodes = _.intersection(
+    //   centrals, neighbours
+    // );
+    const newCenter = this.centerIds[_.sample(neighbours)];
+    this.travelPath = [this.center, newCenter]
+    this.center = newCenter;
+
+  }
 }
 
 function location_along_arc(start, end, loc) {
@@ -74,9 +129,9 @@ function fade_at_edge(d) {
   var centerPos = projection.invert([width/2,height/2]),
       start, end;
   // function is called on 2 different data structures..
-  if (d.coords && d.coords[0]) {
-    start = d.coords[0],
-    end = d.coords[1];
+  if (d[0]) {
+    start = d[0].geometry.coordinates;
+    end = d[1].geometry.coordinates;
   }
   else {
     start = d.geometry.coordinates[0];
@@ -125,216 +180,182 @@ function hide_off(d) {
                 }))
 var g = svg.append("g");
 
-// drawing dark grey spehere as landmass
+function updateLinks(graph){
+  let flyers = g.select("#flyers").selectAll("path")
+    .data(graph.activeEdges, Graph.flyerId);
 
-function makePairs(data,times){
-  let pairs = [];
-  _.sampleSize(data.features, times).forEach((center, i) => {
-    _.times(i, () => {
-      let branch = _.sample(data.features);
-      pairs.push({
-        coords: [
-          center.geometry.coordinates,
-          branch.geometry.coordinates
-        ],
-        pop: [
-          branch.properties.population,
-          center.properties.population,
-        ],
-        points: [
-          center.geometry,
-          branch.geometry
-        ]
-      });
+  flyers.exit()
+    .transition()
+    .duration(300)
+    .attr("stroke", "grey")
+    .remove();
+
+  flyers
+    .attr("d", d => swoosh(flying_arc(d)))
+    .attr("opacity", function(d) {
+        return fade_at_edge(d)
+    });
+
+  flyers
+    .enter().append("path")
+    .attr("id", d => "flyer" + d[1].id)
+    .attr("class","flyer")
+    .attr("d", d => swoosh(flying_arc(d)))
+    .attr("opacity", function(d) {
+        return fade_at_edge(d)
     })
-  });
-  return pairs;
-}
+    .attr("stroke-dasharray", function(){
+      return this.getTotalLength() + " " + this.getTotalLength();
+    })
+    .attr("stroke-dashoffset", function(){return this.getTotalLength()})
+    .transition()
+    // .delay((d, i) => i*100)
+    .duration(2000)
+    .ease(d3.easeCubic)
+    .attr("stroke-dashoffset", 0)
+    .attrTween("stroke-dashoffset", function() {
+      let len = this.getTotalLength();
+      return d3.interpolate(len, 0);
+    });
 
+  let points = g.selectAll("text").data(graph.nodes);
+  points.exit().transition().duration(500).style('opacity', 0).remove();
+  points.attr("d", path);
+  points
+   .enter().append("path")
+   .attr("class", "point")
+   .attr("d", path);
+}
 
 queue()
 .defer(d3.json, "https://gist.githubusercontent.com/d3indepth/f28e1c3a99ea6d84986f35ac8646fac7/raw/c58cede8dab4673c91a3db702d50f7447b373d98/ne_110m_land.json")
-.defer(d3.json, "data/cities.json")
+.defer(d3.json, "data/city-data.json")
 .await((error, geojson, data) => {
   projection.rotate(rotate);
    // Handle errors getting and parsing the data
    if (error) { return error; }
-   g.append("path")
+
+  let graph = new Graph(data, 80, 15);
+  projection.rotate(rotateTo(graph.currentCoords));
+
+  let globe = g.append("g").attr("id", "globe");
+   globe.append("path")
       .datum({type: "Sphere"})
       .attr("class", "front")
       .attr("d", path)
       .attr("fill", "#ffffff");
 
-    g.append("path")
+    globe.append("path")
       .datum({type: 'FeatureCollection', features: geojson.features})
       .attr("class", "front")
       .attr("d", path)
       .attr("fill", "#ccc");
 
-   g.append("path")
+   globe.append("path")
       .datum(d3.geoGraticule())
       .attr("class", "front")
       .attr("class", "graticule")
       .attr("d", path);
-
-   // setting the circle size (not radius!) according to the number of inhabitants per city
-
-
-   links = makePairs(data,10);
-
-   links.forEach(function(e,i,a) {
-     var feature =   { "type": "Feature", "geometry": { "type": "LineString", "coordinates": [e.coords[0],e.coords[1]] }}
-     arcLines.push(feature)
-   })
-   console.log(_.flatten(_.map(links, 'points')));
-
-   // Drawing transparent circle markers for cities
-   svg.append("g")
-    .attr("class","points")
-    .selectAll("text")
-    .data(_.flatten(_.map(links, 'points')))
-    .enter().append("path")
-    .attr("class", "point")
-    .attr("d", path);
+   g.append("g").attr("id","flyers")
+   g.append("g").attr("class","points")
+  updateLinks(graph);
 
 
-   // start spinning!
-  // svg.append("g").attr("class","arcs")
-  //   .selectAll("path").data(arcLines)
+  setInterval(() => {
+    graph.recenter();
+    refocus(graph);
+  }, 5000)
+
+});
+
+function rotateTo(coords){
+  return [-coords[0] + 15, -coords[1] + 15];
+}
+
+
+function refocus(graph){
+  //   .data(links)
+  //   .enter("path").data(links)
   //   .enter().append("path")
-  //    .attr("class","arc")
-  //    .attr("d",path);
-
-  svg.append("g").attr("class","flyers")
-    .selectAll("path").data(links)
-    .enter().append("path")
-    .attr("id" , (d, i) => "flyer" + i)
-    .attr("class","flyer")
-    .attr("d", function(d) { return swoosh(flying_arc(d)) })
-    .attr("opacity", function(d) {
-        return fade_at_edge(d)
-    })
-
-  // svg.append("g").attr("class","arcs")
-  //   .selectAll("path").data(arcLines)
-  //   .attr("id" , (d, i) => "arc" + i)
-  //   .enter().append("path")
-  //   .attr("class","arc")
-  //   .attr("d", path)
+  //   .attr("id" , (d, i) => "flyer" + i)
+  //   .attr("class","flyer")
+  //   .attr("d", function(d) { return swoosh(flying_arc(d)) })
   //   .attr("opacity", function(d) {
   //       return fade_at_edge(d)
   //   });
-  d3.selectAll(".flyer").each(function(d,i){
-  	var totalLength = d3.select("#flyer" + i).node().getTotalLength();
-  		d3.selectAll("#flyer" + i).attr("stroke-dasharray", totalLength + " " + totalLength)
-  		  .attr("stroke-dashoffset", totalLength)
-  		  .transition()
-  		  .duration(4000)
-  		  .delay(80*i)
-  		  .attr("stroke-dashoffset", 0)
-  		  .style("stroke-width",1)
-	})
-  d3.selectAll(".arc").each(function(d,i){
-  	var totalLength = d3.select("#arc" + i).node().getTotalLength();
-  		d3.selectAll("#arc" + i).attr("stroke-dasharray", totalLength + " " + totalLength)
-  		  .attr("stroke-dashoffset", totalLength)
-  		  .transition()
-  		  .duration(4000)
-  		  .delay(80*i)
-  		  .attr("stroke-dashoffset", 0)
-  		  .style("stroke-width",1)
-	})
+    // .attr("display", "none")
+  let f = g.select("#flyers").selectAll("path").filter((d, i) => {
+    console.log("filtering", {d, i, travel: graph.travelPath})
+    return d[0].id === graph.travelPath[0].id && d[1].id === graph.travelPath[1].id;
+  })
+  console.log("flying", {f, travelPath: graph.travelPath});
+  console.log("focusing", f, f.classed("focused"));
 
-   refresh();
-});
+  f.classed("focused", true);
 
-// function refresh() {
-//   svg.selectAll(".land").attr("d", path);
-//   svg.selectAll(".point").attr("d", path);
-//
-//   svg.selectAll(".arc").attr("d", path)
-//     .attr("opacity", function(d) {
-//         return fade_at_edge(d)
-//     })
-//
-//   svg.selectAll(".flyer")
-//     .attr("d", function(d) { return swoosh(flying_arc(d)) })
-//     .attr("opacity", function(d) {
-//       return fade_at_edge(d)
-//     })
-// }
-
-function refresh(){
-  d3.timer(function(elapsed) {
-    if (elapsed > 4000 + links.length * 80){
-      // get current time
-      if (!dragging){
-        let current = projection.rotate();
-        projection.rotate([current[0] + velocity[0] * 10, current[1]]);
-      }
-      // sky.rotate([rotate[0] + velocity[0] * elapsed, rotate[1]+ velocity[1] * elapsed]);
-      svg.selectAll(".land").attr("d", path);
-      svg.selectAll(".point").attr("d", path);
-      svg.selectAll("path").attr("d",path);
-      svg.selectAll(".arc")
-        .attr("d", path)
-        .attr("opacity", function(d) {
+  d3
+    .transition()
+    .duration(3000)
+    .ease(d3.easeCubic)
+    .tween("rotate", function() {
+      var r = d3.interpolate(projection.rotate(), rotateTo(graph.currentCoords));
+      return function(t) {
+        projection.rotate(r(t));
+        svg.selectAll(".land").attr("d", path);
+        svg.selectAll(".point").attr("d", path);
+        svg.selectAll("path").attr("d",path);
+        svg.selectAll(".flyer")
+          .attr("d", function(d) { return swoosh(flying_arc(d)) })
+          .attr("opacity", function(d) {
             return fade_at_edge(d)
-        })
+          })
+          .attr("stroke-dasharray", function(){
+            return this.getTotalLength() + " " + this.getTotalLength();
+          })
+          .attr("stroke-dashoffset", function(){return 0})
+        svg.selectAll("path.cities").attr("d", path);
+        svg.selectAll(".point").attr("d", path);
 
-      svg.selectAll(".flyer")
-        .attr("d", function(d) { return swoosh(flying_arc(d)) })
-        .attr("opacity", function(d) {
-          return fade_at_edge(d)
-        })
-      svg.selectAll("path.cities").attr("d", path);
-      svg.selectAll(".point").attr("d", path);
+        // svg.selectAll("path").attr("d", path)
+        // .classed("focused", function(d, i) { return d.id == focusedCountry.id ? focused = d : false; });
+      };
+    })
+    .on("end", () => {
+      updateLinks(graph);
+      f.classed("focused", false);
+      console.log("unfocusing", f, f.classed("focused"));
 
-      d3.selectAll(".flyer").each(function(d,i){
-      	var totalLength = d3.select("#flyer" + i).node().getTotalLength();
-      		d3.selectAll("#flyer" + i).attr("stroke-dasharray", totalLength + " " + totalLength)
-      		  .attr("stroke-dashoffset", totalLength)
-      		  .attr("stroke-dashoffset", 0)
-      		  .style("stroke-width",1)
-    	})
-      d3.selectAll(".arc").each(function(d,i){
-      	var totalLength = d3.select("#arc" + i).node().getTotalLength();
-      		d3.selectAll("#arc" + i).attr("stroke-dasharray", totalLength + " " + totalLength)
-      		  .attr("stroke-dashoffset", totalLength)
-      		  .attr("stroke-dashoffset", 0)
-      		  .style("stroke-width",1)
-    	})
-    }
+    })
 
-},10);
 
+  // // svg.append("g").attr("class","flyers")
+  //   .selectAll("path").data(links)
+  //   .enter().append("path")
+  //   .attr("id" , (d, i) => "flyer" + i)
+  //   .attr("class","flyer")
+  //   .attr("d", function(d) { return swoosh(flying_arc(d)) })
+  //   .attr("opacity", function(d) {
+  //       return fade_at_edge(d)
+  // });
+  //
+  // console.log(svg.selectAll(".flyer"));
+  // svg.selectAll(".flyer").each(function(d,i){
+  //   var totalLength = d3.select("#flyer" + i).node().getTotalLength();
+  //     d3.selectAll("#flyer" + i).attr("stroke-dasharray", totalLength + " " + totalLength)
+  //       .attr("stroke-dashoffset", totalLength)
+  //       .transition()
+  //       .duration(4000)
+  //       .attr("stroke-dashoffset", 0)
+  //       .style("stroke-width",1)
+  // });
+  // svg.selectAll(".arc").each(function(d,i){
+  //   var totalLength = d3.select("#arc" + i).node().getTotalLength();
+  //     d3.selectAll("#arc" + i).attr("stroke-dasharray", totalLength + " " + totalLength)
+  //       .attr("stroke-dashoffset", totalLength)
+  //       .transition()
+  //       .duration(4000)
+  //       .attr("stroke-dashoffset", 0)
+  //       .style("stroke-width",1)
+  // });
+  return links;
 }
-
-// Events for sliders and button
-// document.getElementById("rotation").addEventListener("change", function() {
-//    var new_speed = this.value;
-//    velocity[0] = new_speed
-// });
-//
-// document.getElementById("glow").addEventListener("change", function() {
-//    var new_glow = this.value;
-//    g.selectAll("path.cities")
-//    .attr("fill-opacity", new_glow);
-// });
-//
-// document.getElementById("marker_size").addEventListener("change", function() {
-//    var new_marker_size = 1 / this.value ;
-//    peoplePerPixel = new_marker_size * 100000;
-//    var rMin = 0;
-//    var rMax = Math.sqrt(max_population / (peoplePerPixel * Math.PI));
-//    rScale.range([rMin, rMax]);
-// });
-//
-// document.getElementById("color").addEventListener("change", function() {
-//    var new_color = this.value;
-//    g.selectAll("path.cities")
-//    .attr("fill", new_color);
-// });
-
-// hackish approach to get bl.ocks.org to display individual height
-d3.select(self.frameElement).style("height", height + "px");

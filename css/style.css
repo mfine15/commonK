@@ -1,139 +1,233 @@
-body#body{
-  font-family: 'Open Sans', sans-serif;
-  font-weight: lighter;
+@media (min-width: 1080px) {
+  .container {
+    width: 1080px;
+    margin: 0 auto;
+    -webkit-box-sizing: border-box;
+    /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;
+    /* Firefox, other Gecko */
+    box-sizing: border-box;
+    /* Opera/IE 8+ */ } }
+body#body {
+  font-family: "Roboto", sans-serif;
+  font-weight: 100;
   display: flex;
   min-height: 100vh;
   flex-direction: column;
-}
-#body .pure-button:hover{
-  background:white;
-}
-.flex-main{
-  flex: 1;
-}
-#body .pure-g{
-  width: 1200px;
-}
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; }
+  body#body .flex-main {
+    flex: 1; }
+  body#body .pure-form.email .pure-button {
+    background-color: #6400e3;
+    color: white;
+    height: 50px;
+    border-radius: 0 5px 5px 0;
+    margin-left: -5px; }
+  body#body .pure-form.email .pure-button:hover {
+    background-color: #5900ca; }
+  body#body .pure-form.email input {
+    height: 50px;
+    font-size: 20px;
+    margin: 0;
+    border-radius: 5px 0 0 5px;
+    -webkit-transition: all 0.30s ease-in-out;
+    -moz-transition: all 0.30s ease-in-out;
+    -ms-transition: all 0.30s ease-in-out;
+    -o-transition: all 0.30s ease-in-out;
+    outline: none;
+    border: 1px solid #6400e3; }
+  body#body .pure-form.email input:focus {
+    box-shadow: 0 0 5px #6400e3;
+    border: 1px solid #6400e3; }
 
-.container{
-  max-width: 1080px;
-  margin:0 auto 20px auto;
+.modal {
+  display: none; }
 
-}
-.hero{
-  height:500px;
-  /*background: rgb(87, 87, 87);*/
-}
-header .container{
-  height: 40px;
-}
+main.content {
+  height: 750px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  /*background: rgb(87, 87, 87);*/ }
 
-#body header .pure-button{
-  border-radius: 0;
-  border: 1px solid #424242;
-  background-color:white;
-  height: 40px;
-}
-
-#globe{
-  padding-top: 50px;
-}
-
-#body header .pure-menu-button:hover{
+header {
+  position: fixed;
+  background-color: white;
+  border-bottom: 1px solid #f6f9fc;
+  padding: 0.5em;
+  height: 60px;
+  color: #424242;
   background: white;
-}
-.home-menu {
-    padding: 0.5em;
-    text-align: center;
-    height:60px;
-    color: #424242;
-    background: white;
-    box-shadow: 0 1px 0 0 rgba(0,0,0,0.066);
-}
-header .pure-menu-heading{
-  text-transform: none;
-  font-size: 30px;
-  padding: 0;
-
-}
-.centered{
-}
-.home-menu {
-    text-align: left;
-    /*background-color:#2a334c;*/
-    /*color:white;*/
-}
-.home-menu ul {
+  box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.066); }
+  header .container {
+    height: 40px;
+    padding: 0 40px 0 0; }
+  header .pure-button {
+    border-radius: 0;
+    border: 1px solid #424242;
+    background-color: white;
+    height: 40px; }
+  header .pure-menu-item :hover {
+    background: white; }
+  header .pure-menu-item a:hover {
+    border-bottom: 2px solid #6400e3; }
+  header ul.pure-menu-list {
     float: right;
-    color: #3a3a3a;
-    font-size: 13px;
-    font-weight: 600;
-    margin-top: 5px;
-}
-.pitch h1{
+    color: #424242;
+    font-size: 15px;
+    margin-top: 5px; }
+  header ul.pure-menu-list :hover {
+    margin-top: -2px; }
+  header .pure-menu-heading {
+    text-transform: none;
+    font-size: 30px;
+    padding: 0; }
+
+.pitch h1 {
   font-size: 3em;
-  font-family: 'Open Sans', sans-serif;
   color: #6400e3;
   font-style: normal;
-  margin-top:100px;
-  font-family: 'Merriweather', serif;
-  font-weight: 100;
-}
-.pitch h1.underline{
-  width:80px;
-  margin:20px 0 5px 0;
-  border-bottom:5px solid #6400e3;
-}
-
-.pitch p{
+  margin-top: 100px;
+  font-family: "Roboto Slab", serif;
+  font-weight: 100; }
+.pitch .underline {
+  width: 80px;
+  margin: 20px 0 5px 0;
+  border-bottom: 5px solid #6400e3; }
+.pitch p {
   color: #424242;
+  font-family: 'Roboto', sans-serif;
   font-size: 16px;
-  font-family: 'Open Sans', sans-serif;
-  line-height: 32px;
-  font-weight:lighter;
-}
-.colored{
-  color: #6400e3;
-}
-#body .email{
-  margin-top: 40px;
-}
-#body input{
+  line-height: 26px;
+  letter-spacing: 0.044em;
+  font-weight: 300; }
+
+.colored {
+  color: #6400e3; }
+
+#body .email {
+  margin-top: 40px; }
+
+#body input {
   box-shadow: none;
-  font-weight:lighter;
-}
+  font-weight: lighter; }
 
-#body form .pure-button{
+#body .tingle-modal-box {
+  border-radius: 0;
+  padding: 0;
+  max-width: 350px;
+  text-align: center; }
+  #body .tingle-modal-box .tingle-modal-box__content {
+    padding: 0; }
+  #body .tingle-modal-box .tingle-modal-box__footer {
+    border-radius: 0;
+    padding: 0;
+    font-size: 12px;
+    background-color: #444754;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    color: #dddee3;
+    justify-content: center; }
+    #body .tingle-modal-box .tingle-modal-box__footer a {
+      color: #0b91ff;
+      text-decoration: none; }
+  #body .tingle-modal-box #error.active {
+    position: relative;
+    opacity: 1;
+    transition: opacity 1s linear; }
+  #body .tingle-modal-box #error {
+    border-radius: 2px;
+    background-color: #f47676;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    opacity: 0;
+    border: 1px solid #ec1818;
+    text-align: center;
+    padding: 10px 20px;
+    max-width: 250px;
+    margin: 0 auto 20px auto; }
+    #body .tingle-modal-box #error p {
+      color: #c11010;
+      font-family: "Roboto", sans-serif;
+      font-size: 12px;
+      margin: 0 0 0 0; }
+    #body .tingle-modal-box #error span {
+      font-weight: 600;
+      color: #aa0e0e; }
+  #body .tingle-modal-box .signup {
+    margin: 0 auto 20px auto;
+    float: none;
+    height: auto;
+    width: auto;
+    text-align: center; }
+  #body .tingle-modal-box h2 {
+    font-size: 32px;
+    margin-top: 0.4em;
+    font-weight: 200; }
+  #body .tingle-modal-box button {
+    margin: 10px 0 0 0;
+    border-radius: 5px; }
+  #body .tingle-modal-box form {
+    max-width: 290px;
+    margin: 0 auto;
+    float: none; }
+    #body .tingle-modal-box form input {
+      margin-bottom: 5px;
+      font-size: 12px;
+      height: 40px;
+      -moz-box-shadow: inset 1px 2px 5px rgba(0, 0, 0, 0.07);
+      -webkit-box-shadow: inset 0px 1px 0px 0px rgba(0, 0, 0, 0.7);
+      box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.03); }
+
+#about {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 500px;
+  background-color: #f6f9fc; }
+  #about p {
+    color: #424242;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    line-height: 26px;
+    letter-spacing: 0.044em;
+    font-weight: 100;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /*color:#e0e0e0;*/ }
+  #about h2 {
+    padding: 0;
+    margin: 30px 0;
+    font-family: "Roboto Slab", serif;
+    font-weight: 300;
+    font-size: 2em; }
+  #about .img {
+    display: flex;
+    align-items: center;
+    justify-content: center; }
+  #about img {
+    width: 250px;
+    height: 250px;
+    border-radius: 250px; }
+
+footer {
+  -webkit-box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.25);
   background-color: white;
-  border:2px solid #6400e3;
-  color:#6400e3;
-  width:200px;
-  height:50px;
-  border-radius: 0px;
-  display:block;
-  margin:0 auto;
-}
-#body form .pure-button:hover{
-  background-color: #6400e3;
-  border:2px solid #6400e3;
-  color:white;
-  width:200px;
-  height:50px;
-  border-radius: 0px;
-}
-
-footer{
-  -webkit-box-shadow: inset 0px 2px 6px 0px rgba(0,0,0,0.15);
-  -moz-box-shadow: inset 0px 2px 6px 0px rgba(0,0,0,0.15);
-  box-shadow: inset 0px 2px 6px 0px rgba(0,0,0,0.15);
-  background-color: #eeeeee;
+  border-top: 2px solid #f6f9fc;
   width: 100%;
-  height:60px;
+  height: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
   color: #3a3a3a;
   font-size: 13px;
-  font-weight: 600;
-  margin-top: 5px;
-}
+  font-weight: 600; }
+
+/*# sourceMappingURL=style.css.map */
