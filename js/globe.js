@@ -1,5 +1,6 @@
-var width  = 540;
-var height = 540;
+var isSmall = window.innerWidth < 720; 
+var width  =  isSmall? 360 : 540;
+var height = isSmall? 360 : 540;
 var rScale = d3.scaleSqrt();
 var peoplePerPixel = 50000;
 var max_population = [];
@@ -12,9 +13,14 @@ var rotate = [0, -35];
 var velocity = [.006, .0015];
 var sens = 0.25;
 var dragging = false;
+
+const stepTime = 2000;
+const drawTime = 3000;
+const rotateTime = 5000;
+
 // set projection type and paremeters
 var projection = d3.geoOrthographic()
-   .scale(220)
+   .scale(isSmall? 160 : 220)
    .translate([(width / 2), height / 2])
    .clipAngle(90);
 var path = d3.geoPath().projection(projection).pointRadius(2);
@@ -24,14 +30,14 @@ var path = d3.geoPath().projection(projection).pointRadius(2);
 //    .clipAngle(90)
 //    .scale(260);
 
-var swoosh = d3.line()
-     .x(function(d) { return d[0] })
-     .y(function(d) { return d[1] })
-     .curve(d3.curveCardinal);
+// var swoosh = d3.line()
+//      .x(function(d) { return d[0] })
+//      .y(function(d) { return d[1] })
+//      .curve(d3.curveCardinal);
 
-// function swoosh([x,y,z]){
-//   return path({type: "LineString", coordinates: [x, z]});
-// }
+function swoosh([x,y,z]){
+  return path({type: "LineString", coordinates: [x, z]});
+}
 var arc = d3.line()
      .x(function(d) { return d[0] })
      .y(function(d) { return d[1] })
@@ -209,8 +215,8 @@ function updateLinks(graph){
     })
     .attr("stroke-dashoffset", function(){return this.getTotalLength()})
     .transition()
-    // .delay((d, i) => i*100)
-    .duration(2000)
+    .delay((d, i) => i*100)
+    .duration(drawTime)
     .ease(d3.easeCubic)
     .attr("stroke-dashoffset", 0)
     .attrTween("stroke-dashoffset", function() {
@@ -264,7 +270,7 @@ queue()
   setInterval(() => {
     graph.recenter();
     refocus(graph);
-  }, 5000)
+  }, stepTime+rotateTime+drawTime)
 
 });
 
@@ -295,7 +301,7 @@ function refocus(graph){
 
   d3
     .transition()
-    .duration(3000)
+    .duration(rotateTime)
     .ease(d3.easeCubic)
     .tween("rotate", function() {
       var r = d3.interpolate(projection.rotate(), rotateTo(graph.currentCoords));

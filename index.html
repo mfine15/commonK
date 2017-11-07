@@ -18,8 +18,7 @@
     <script src="http://d3js.org/queue.v1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.4/lodash.min.js"></script>
     <link rel="stylesheet" href="css/tingle.css">
-<link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Slab" rel="stylesheet">
-<script async src="js/globe.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Roboto|Merriweather" rel="stylesheet">
 
   </head>
 
@@ -30,34 +29,38 @@
       <div class="container">
         <a class="pure-menu-heading" href="">common<span class="colored">K</span></a>
         <ul class="pure-menu-list">
-            <li class="pure-menu-item pure-menu-selected"><a href="#" class="pure-menu-link">Home</a></li>
-            <li class="pure-menu-item"><a href="#about" class="pure-menu-link">About</a></li>
+            <li class="pure-menu-item pure-menu-selected pure-hidden-sm"><a href="#" class="pure-menu-link">Home</a></li>
+            <li class="pure-menu-item pure-hidden-sm"><a href="#about" class="pure-menu-link ">About</a></li>
             <li class="pure-menu-item"><a onclick="openModal()" class="pure-menu-link">
               Login
             </a></li>
         </ul>
       </div>
     </header>
+    <div class="spacer1">
+        &nbsp;
+    </div>
 
   <main class="content">
     <div class="hero">
       <div class="container">
         <div class="pure-g">
-          <div class="pure-u-13-24 pitch">
+          <div class="pure-u-md-13-24 pitch pure-u-1">
             <div class="text">
               <h1>A powerful societal data explorer, for everybody</h1>
               <h1 class="underline">   </h1>
               <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
             </div>
-            <form class="pure-form email">
-              <input type="text" id="email-input" placeholder="Enter your email to start" class="pure-input-2-3">
-              <button onclick="preventDefault" class="pure-button pure-button-1-3">Request Access</button>
+            <form class="pure-form email pure-g" action="https://commonK.us17.list-manage.com/subscribe/post?u=b176a8176eaaa7f7f21f5efd7&amp;id=551e832523" method="post"name="mc-embedded-subscribe-form" class="validate" target="_blank">
+              <input type="email" value="" name="EMAIL" id="email-input" placeholder="Enter your email to start" class="email pure-input-2-3" required>
+              <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_b176a8176eaaa7f7f21f5efd7_551e832523" tabindex="-1" value=""></div>
+              <button type="submit" onclick="preventDefault" class="pure-button pure-button-1-3"><span>Request Access</span></button>
             </form>
           </div>
-          <div class="pure-u-11-24" id="globe">
-          </div>
+          <div class="pure-u-md-11-24 pure-u-1" id="globe">
 
+          </div>
         </div>
       </div>
     </div>
@@ -65,16 +68,16 @@
 <div id="about">
   <div class="container">
     <div class="pure-g">
-      <div class="pure-u-1-3"></div>
-      <div class="pure-u-2-3">
+      <!-- <div class="pure-u-md-1-3 pure-u-1"></div> -->
+      <div class="pure-u-md-1 pure-u-1">
         <h2>Meet the Team</h2>
       </div>
-      <div class="pure-u-1-3 img">
+      <div class="pure-u-md-1-3 img pure-u-1">
         <img src="img/zia.jpg"></img>
       </div>
-      <div class="pure-u-2-3" id="about-text">
+      <div class="pure-u-md-2-3 pure-u-1" id="about-text">
         <p>
-          Drawing on a background in anticorruption activism, financial services law, and investment banking and on training in mathematics, Zia Haider Rahman is leading a team building a platform that uses network science to increase transparency in governmental and corporate relationships.
+          Drawing on a background in anticorruption activism, financial services law, and investment banking and on training in mathematics, <b>Zia Haider Rahman</b> is leading a team building a platform that uses network science to increase transparency in governmental and corporate relationships.
         </p>
         <p>
           He is the Walter Jackson Bate Fellow at the Radcliffe Institute for Advanced Study, Harvard University, a fellow at New America, Washington, DC, and a senior fellow at the Bruno Kreisky Forum, in Vienna, and has been appointed a Director’s Visitor at the Institute for Advanced Study, in Princeton. He was born in Bangladesh, grew up in the UK, and was educated at the University of Oxford (Balliol College), the University of Cambridge, and Yale University.
@@ -96,15 +99,15 @@
   <div class="modal" id="login-modal">
     <div id="modal-main">
       <div class="signup pure-g">
-        <h2 class="pure-u-1"> Sign In</h2>
-        <div id="error" class="pure-u-1">
+        <h2 class="pure-u-md-1 pure-u-1"> Sign In</h2>
+        <div id="error" class="pure-u-md-1 pure-u-1">
           <p><span>Error:</span> Username and password don't match</p>
         </div>
         <form class="pure-form">
             <input type="text" class="pure-input-1" placeholder="Username">
             <input type="text" class="pure-input-1" placeholder="Password">
 
-            <button type="submit" onclick="signIn()" class="pure-button pure-button-primary">Sign in</button>
+            <button onclick="signIn()" class="pure-button pure-button-primary">Sign in</button>
         </form>
 
       </div>
@@ -119,5 +122,28 @@
   <script src="js/zenscroll-min.js"></script>
   <script src="js/tingle.min.js"></script>
   <script src="js/index.js"></script>
+  <script src="js/three.min.js"></script>
+  <script src="js/globe.js"></script>
+
+  <!-- <script>
+    var container = document.getElementById( 'globe' );
+    var globe = new DAT.Globe( container );
+    var xhr = new XMLHttpRequest();
+    xhr.open( 'GET', 'data/flight_traffic.json', true );
+    xhr.onreadystatechange = function() {
+      if ( xhr.readyState === 4 && xhr.status === 200 ) {
+        var data = JSON.parse( xhr.responseText );
+        var options = {'format': 'magnitude', 'imgDir': '/'}
+        globe.addData(data, options);
+        globe.addGraticule();
+        globe.animate();
+
+      }
+
+    };
+
+    // Begin request
+    xhr.send( null );
+  </script> -->
 </body>
 </html>

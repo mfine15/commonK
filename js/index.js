@@ -38,7 +38,7 @@ function openModal(e){
   modal.open();
 }
 
-function signIn(){
+function signIn(e){
   document.getElementById("error").className = "pure-u-1 active";
 }
 
