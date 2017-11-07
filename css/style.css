@@ -1,45 +1,373 @@
-/*
-Error: Invalid CSS after "...splay:none;}  }": expected "}", was ""
-        on line 481 of style/style.scss
+@media (max-width: 540px) {
+  .tingle-modal {
+    display: inherit !important; }
 
-476:   #body .pure-visible-lg{
-477:     display:none;
-478:   }
-479:   #body .pure-hidden-xl{
-480:     display:none;}  }
+  .tingle-modal__close {
+    height: inherit !important;
+    padding-bottom: 5px !important; }
 
-Backtrace:
-style/style.scss:481
-/Library/Ruby/Gems/2.0.0/gems/sass-3.5.2/lib/sass/scss/parser.rb:1278:in `expected'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.5.2/lib/sass/scss/parser.rb:1208:in `expected'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.5.2/lib/sass/scss/parser.rb:1203:in `tok!'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.5.2/lib/sass/scss/parser.rb:679:in `block'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.5.2/lib/sass/scss/parser.rb:670:in `ruleset'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.5.2/lib/sass/scss/parser.rb:696:in `block_child'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.5.2/lib/sass/scss/parser.rb:689:in `block_contents'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.5.2/lib/sass/scss/parser.rb:137:in `stylesheet'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.5.2/lib/sass/scss/parser.rb:41:in `parse'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.5.2/lib/sass/engine.rb:414:in `_to_tree'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.5.2/lib/sass/engine.rb:389:in `_render_with_sourcemap'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.5.2/lib/sass/engine.rb:307:in `render_with_sourcemap'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.5.2/lib/sass/plugin/compiler.rb:462:in `update_stylesheet'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.5.2/lib/sass/plugin/compiler.rb:215:in `block in update_stylesheets'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.5.2/lib/sass/plugin/compiler.rb:209:in `each'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.5.2/lib/sass/plugin/compiler.rb:209:in `update_stylesheets'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.5.2/lib/sass/plugin/compiler.rb:443:in `on_file_changed'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.5.2/lib/sass/plugin/compiler.rb:320:in `block in watch'
-/Library/Ruby/Gems/2.0.0/gems/sass-listen-4.0.0/lib/sass-listen/event/config.rb:23:in `call'
-/Library/Ruby/Gems/2.0.0/gems/sass-listen-4.0.0/lib/sass-listen/event/config.rb:23:in `call'
-/Library/Ruby/Gems/2.0.0/gems/sass-listen-4.0.0/lib/sass-listen/event/processor.rb:115:in `_process_changes'
-/Library/Ruby/Gems/2.0.0/gems/sass-listen-4.0.0/lib/sass-listen/event/processor.rb:19:in `block in loop_for'
-/Library/Ruby/Gems/2.0.0/gems/sass-listen-4.0.0/lib/sass-listen/event/processor.rb:15:in `loop'
-/Library/Ruby/Gems/2.0.0/gems/sass-listen-4.0.0/lib/sass-listen/event/processor.rb:15:in `loop_for'
-/Library/Ruby/Gems/2.0.0/gems/sass-listen-4.0.0/lib/sass-listen/event/loop.rb:84:in `_wait_for_changes'
-/Library/Ruby/Gems/2.0.0/gems/sass-listen-4.0.0/lib/sass-listen/event/loop.rb:42:in `block in setup'
-/Library/Ruby/Gems/2.0.0/gems/sass-listen-4.0.0/lib/sass-listen/internals/thread_pool.rb:6:in `call'
-/Library/Ruby/Gems/2.0.0/gems/sass-listen-4.0.0/lib/sass-listen/internals/thread_pool.rb:6:in `block in add'
-*/
-body:before {
-  white-space: pre;
-  font-family: monospace;
-  content: "Error: Invalid CSS after \"...splay:none;}  }\": expected \"}\", was \"\"\A         on line 481 of style/style.scss\A \A 476:   #body .pure-visible-lg{\A 477:     display:none;\A 478:   }\A 479:   #body .pure-hidden-xl{\A 480:     display:none;}  }"; }
+  .tingle-modal-box__footer {
+    padding: 0 20px !important; } }
+@media (min-width: 721px) {
+  .container {
+    width: 1080px;
+    margin: 0 auto;
+    -webkit-box-sizing: border-box;
+    /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;
+    /* Firefox, other Gecko */
+    box-sizing: border-box;
+    /* Opera/IE 8+ */ }
+
+  .pitch h1 {
+    margin-top: 100px;
+    font-size: 3em !important; }
+  .pitch .text, .pitch .email {
+    margin: 0 !important; }
+
+  #about h1 {
+    text-align: left; }
+  #about img {
+    width: 250px !important;
+    height: 250px !important;
+    border-radius: 250px !important; }
+  #about .pure-form.email {
+    font-size: 1.25em; }
+    #about .pure-form.email .pure-button {
+      font-size: 1em; } }
+@media (max-width: 720px) {
+  #globe {
+    order: 1; }
+
+  .pitch {
+    order: 2; }
+
+  .hero .container .pure-g {
+    display: flex;
+    flex-flow: column; }
+
+  .content {
+    /*margin-top:50px;*/ }
+
+  header.home-menu .container {
+    padding: 0 40px 0 10px; }
+
+  #body .tingle-modal-box {
+    max-width: 250px !important; }
+    #body .tingle-modal-box .tingle-modal-box__content {
+      padding: 0 25px !important; } }
+#globe {
+  float: right; }
+
+body#body {
+  font-family: "Roboto", sans-serif;
+  font-weight: 100;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column; }
+  body#body p {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale; }
+  body#body .flex-main {
+    flex: 1; }
+  body#body .pure-form.email {
+    display: block;
+    font-size: 1em; }
+    body#body .pure-form.email .pure-button {
+      background-color: #6400e3;
+      color: white;
+      height: 50px;
+      border-radius: 0 5px 5px 0;
+      padding: 0 10px;
+      font-size: 0.85em;
+      margin: 0 0 0 -5px; }
+    body#body .pure-form.email .pure-button:hover {
+      background-color: #5900ca; }
+    body#body .pure-form.email input {
+      order: inherit;
+      display: inline !important;
+      height: 50px;
+      font-size: 1em;
+      margin: 0;
+      border-radius: 5px 0 0 5px;
+      -webkit-transition: all 0.30s ease-in-out;
+      -moz-transition: all 0.30s ease-in-out;
+      -ms-transition: all 0.30s ease-in-out;
+      -o-transition: all 0.30s ease-in-out;
+      outline: none;
+      border: 1px solid #6400e3; }
+    body#body .pure-form.email input:focus {
+      box-shadow: 0 0 5px #6400e3;
+      border: 1px solid #6400e3; }
+
+.modal {
+  display: none; }
+
+main.content {
+  min-height: 75vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 50px;
+  background-color: white; }
+
+.spacer1 {
+  height: 60px;
+  width: 100%; }
+
+header {
+  position: fixed;
+  background-color: white;
+  border-bottom: 1px solid #f6f9fc;
+  padding: 0.5em;
+  height: 60px;
+  color: #424242;
+  background: white;
+  box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.066); }
+  header .container {
+    height: 40px;
+    padding: 0 40px 0 0; }
+  header .pure-button {
+    border-radius: 0;
+    border: 1px solid #424242;
+    background-color: white;
+    height: 40px; }
+  header .pure-menu-item :hover {
+    background: white; }
+  header .pure-menu-item a:hover {
+    border-bottom: 2px solid #6400e3; }
+  header ul.pure-menu-list {
+    float: right;
+    color: #424242;
+    font-size: 0.9em;
+    margin-top: 5px; }
+  header ul.pure-menu-list :hover {
+    margin-top: -2px; }
+  header .pure-menu-heading {
+    text-transform: none;
+    font-size: 2em;
+    padding: 0; }
+
+.pitch {
+  float: left; }
+  .pitch .text, .pitch .email {
+    margin: 0 25px; }
+  .pitch h1 {
+    font-size: 2em;
+    color: #6400e3;
+    font-style: normal;
+    font-family: "Merriweather", serif;
+    font-weight: 100; }
+  .pitch .underline {
+    width: 15%;
+    margin: 15px 0 15px 0;
+    border-bottom: 3px solid #6400e3; }
+  .pitch p {
+    color: #424242;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1em;
+    line-height: 2em;
+    letter-spacing: 0.044em;
+    font-weight: 300; }
+
+.colored {
+  color: #6400e3; }
+
+#body .email {
+  margin-top: 40px; }
+
+#body input {
+  box-shadow: none;
+  font-weight: lighter; }
+
+#body .tingle-modal-box {
+  border-radius: 0;
+  padding: 0;
+  max-width: 350px;
+  text-align: center; }
+  #body .tingle-modal-box .tingle-modal-box__content {
+    padding: 0; }
+  #body .tingle-modal-box .tingle-modal-box__footer {
+    border-radius: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    font-size: 0.85em;
+    background-color: #444754;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    color: #dddee3;
+    justify-content: center; }
+    #body .tingle-modal-box .tingle-modal-box__footer a {
+      color: #0b91ff;
+      text-decoration: none; }
+  #body .tingle-modal-box #error.active {
+    position: relative;
+    opacity: 1;
+    transition: opacity 1s linear; }
+  #body .tingle-modal-box #error {
+    border-radius: 2px;
+    background-color: #f47676;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    opacity: 0;
+    border: 1px solid #ec1818;
+    text-align: center;
+    padding: 10px 20px;
+    max-width: 250px;
+    margin: 0 auto 20px auto; }
+    #body .tingle-modal-box #error p {
+      color: #c11010;
+      font-family: "Roboto", sans-serif;
+      font-size: 0.75em;
+      margin: 0 0 0 0; }
+    #body .tingle-modal-box #error span {
+      font-weight: 600;
+      color: #aa0e0e; }
+  #body .tingle-modal-box .signup {
+    margin: 0 auto 20px auto;
+    float: none;
+    height: auto;
+    width: auto;
+    text-align: center; }
+  #body .tingle-modal-box h2 {
+    font-size: 2em;
+    margin-top: 0.4em;
+    font-weight: 200; }
+  #body .tingle-modal-box button {
+    margin: 10px 0 0 0;
+    border-radius: 5px; }
+  #body .tingle-modal-box form {
+    max-width: 290px;
+    margin: 0 auto;
+    float: none; }
+    #body .tingle-modal-box form input {
+      margin-bottom: 5px;
+      font-size: 0.75em;
+      height: 40px;
+      -moz-box-shadow: inset 1px 2px 5px rgba(0, 0, 0, 0.07);
+      -webkit-box-shadow: inset 0px 1px 0px 0px rgba(0, 0, 0, 0.7);
+      box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.03); }
+
+#about {
+  -webkit-box-shadow: inset 0px 2px 6px 0px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: inset 0px 2px 2px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0px 2px 2px 0px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 500px;
+  padding-bottom: 50px;
+  background-color: #f6f9fc; }
+  #about p {
+    color: #424242;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1em;
+    line-height: 26px;
+    letter-spacing: 0.044em;
+    font-weight: 100;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /*color:#e0e0e0;*/ }
+  #about h2 {
+    padding: 0;
+    text-align: center;
+    letter-spacing: 0;
+    margin: 30px 0;
+    font-family: "Merriweather", serif;
+    font-weight: 300;
+    font-size: 2em; }
+  #about .img {
+    display: flex;
+    align-items: center;
+    justify-content: center; }
+  #about img {
+    width: 200px;
+    height: 200px;
+    border-radius: 200px; }
+  #about #about-text {
+    padding: 0 25px;
+    box-sizing: border-box; }
+
+footer {
+  -webkit-box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.25);
+  background-color: white;
+  border-top: 2px solid #f6f9fc;
+  width: 100%;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #3a3a3a;
+  font-size: 0.85em;
+  font-weight: 600; }
+
+@media screen and (max-width: 35.49em) {
+  #body .pure-visible-sm {
+    display: none; }
+
+  #body .pure-visible-md {
+    display: none; }
+
+  #body .pure-visible-lg {
+    display: none; }
+
+  #body .pure-visible-xl {
+    display: none; }
+
+  #body .pure-hidden-xs {
+    display: none; } }
+@media screen and (max-width: 47.99em) {
+  #body .pure-visible-md {
+    display: none; }
+
+  #body .pure-visible-lg {
+    display: none; }
+
+  #body .pure-visible-xl {
+    display: none; }
+
+  #body .pure-hidden-sm {
+    display: none; } }
+@media screen and (min-width: 48em) and (max-width: 63.99em) {
+  #body .pure-visible-sm {
+    display: none; }
+
+  #body .pure-visible-lg {
+    display: none; }
+
+  #body .pure-visible-xl {
+    display: none; }
+
+  #body .pure-hidden-md {
+    display: none; } }
+@media screen and (min-width: 64em) and (max-width: 79.99em) {
+  #body .pure-visible-sm {
+    display: none; }
+
+  #body .pure-visible-md {
+    display: none; }
+
+  #body .pure-visible-xl {
+    display: none; }
+
+  #body .pure-hidden-lg {
+    display: none; } }
+@media screen and (min-width: 80em) {
+  #body .pure-visible-sm {
+    display: none; }
+
+  #body .pure-visible-md {
+    display: none; }
+
+  #body .pure-visible-lg {
+    display: none; }
+
+  #body .pure-hidden-xl {
+    display: none; } }
+
+/*# sourceMappingURL=style.css.map */
