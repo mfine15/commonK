@@ -5,6 +5,7 @@ $main-font: 'Roboto', sans-serif;
 $back-color:  #f6f9fc;
 $error-color: #f47676;
 
+
 @media (max-width: 540px){
   .tingle-modal {
     display: inherit !important;
@@ -71,7 +72,7 @@ $error-color: #f47676;
     /*margin-top:50px;*/
   }
   header.home-menu .container{
-    padding:0 40px 0 10px;
+    padding:0 10px 0 10px;
   }
   #body .tingle-modal-box{
     max-width: 250px !important;
@@ -84,6 +85,9 @@ $error-color: #f47676;
   float:right;
 }
 
+.email{
+  margin:0 !important;
+}
 body#body{
   font-family: $main-font;
   font-weight: 100;
@@ -95,13 +99,21 @@ body#body{
     -moz-osx-font-smoothing: grayscale;
   }
 
-
+  .pure-g > div {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+  .l-box {
+    padding: 1em;
+  }
   .flex-main{
     flex: 1;
   }
   .pure-form.email{
     display: block;
     font-size: 1em;
+    padding:0 10px;
 
     .pure-button{
       background-color: $primary-color;
@@ -177,7 +189,7 @@ header{
   .pure-menu-item a:hover{
     border-bottom: 2px solid $primary-color;
   }
-    padding: 0.5em;
+    padding: 0.5em 0;
     // text-align: center;
     height:60px;
     color: #424242;
@@ -203,7 +215,7 @@ header{
 .pitch {
   float:left;
   .text,.email{
-    margin:0 25px;
+    padding:0 25px;
   }
   h1 {
     font-size:2em;
