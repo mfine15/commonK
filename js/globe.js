@@ -1,6 +1,7 @@
 var isSmall = window.innerWidth < 720; 
 var width  =  Math.min(window.innerWidth, 540);
 var height =  isSmall? 270 : 540;
+var graticuleStep = isSmall? 15 : 10;
 
 var peoplePerPixel = 50000;
 var max_population = [];
@@ -22,7 +23,9 @@ var projection = d3.geoOrthographic()
    .clipAngle(90);
 var path = d3.geoPath().projection(projection);
 
-
+function runTimes(n, fn){
+  return Array.apply(null, Array(5)).map(function (_, i) {return fn(i);});
+}
 function location_along_arc(start, end, loc) {
   var interpolator = d3.geoInterpolate(start,end);
   return interpolator(loc)
@@ -44,17 +47,24 @@ var g = svg.append("g");
 
 // drawing dark grey spehere as landmass
 
+
+
+function sample(arr){
+  let x = Math.round(Math.random() * (arr.length - 1));
+  // debugger;
+  return arr[x];
+}
 function makePairs(data,times){
   let pairs = [];
   let points = [];
   let i = 0;
   while(pairs.length < times){
-    let center = _.sample(data.features);
+    let center = sample(data.features);
 
     points.push(Object.assign(center, center.properties));
 
-    _.times(Math.pow(i,2), () => {
-      let branch = _.sample(data.features);
+    runTimes(Math.floor(Math.pow(i,2.2)), () => {
+      let branch = sample(data.features);
       pairs.push({
         coords: [
           center.geometry.coordinates,
@@ -78,10 +88,9 @@ function makePairs(data,times){
 }
 
 
-queue()
-.defer(d3.json, "https://gist.githubusercontent.com/d3indepth/f28e1c3a99ea6d84986f35ac8646fac7/raw/c58cede8dab4673c91a3db702d50f7447b373d98/ne_110m_land.json")
-.defer(d3.json, "data/cities.json")
-.await((error, geojson, data) => {
+d3.json("data/geojson.json", (error, geojson) => {
+d3.json("data/cities.json", (error2, data) => {
+
   projection.rotate(rotate);
    // Handle errors getting and parsing the data
    if (error) { return error; }
@@ -98,13 +107,13 @@ queue()
       .attr("fill", "#ccc");
 
    g.append("path")
-      .datum(d3.geoGraticule())
+      .datum(d3.geoGraticule().step([graticuleStep, graticuleStep]))
       .attr("class", "front")
       .attr("class", "graticule")
       .attr("d", path);
 
 
-   let [links, points] = makePairs(data,30);
+   let [links, points] = makePairs(data,40);
 
    links.forEach(function(e,i,a) {
      var feature = { 
@@ -168,36 +177,30 @@ queue()
 
 
    refresh();
+
+})
 });
 
 
 function refresh(){
-  d3.timer(function(elapsed) {
+  d3.interval(function(elapsed) {
     if (elapsed > 4000 + links.length * 80){
       // get current time
       if (!dragging){
         let current = projection.rotate();
-        projection.rotate([current[0] + velocity[0] * 10, current[1]]);
+        projection.rotate([current[0] + velocity[0] * 20, current[1]]);
       }
       // sky.rotate([rotate[0] + velocity[0] * elapsed, rotate[1]+ velocity[1] * elapsed]);
       svg.selectAll(".land").attr("d", path);
       svg.selectAll(".point")
         .attr("d", path)
 
-      svg.selectAll("path").attr("d",path);
-      svg.selectAll(".arc")
-        .attr("d", path)
-        .attr("opacity", function(d) {
-            return fade_at_edge(d)
-        })
+      svg.selectAll(".front").attr("d",path);
+      svg.selectAll(".graticule").attr("d",path);
 
       svg.selectAll(".flyer")
         .attr("d", path)
-        .attr("opacity", function(d) {
-          return fade_at_edge(d)
-        })
-      }
-
-},100);
+    }
+},50);
 
 }

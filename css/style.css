@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css?family=Merriweather|Roboto");
 @media (max-width: 540px) {
   .tingle-modal {
     display: inherit !important; }
@@ -46,6 +47,10 @@
     display: flex;
     flex-flow: column; }
 
+  .text, .email {
+    padding: 0 25px !important;
+    display: border-box; }
+
   .content {
     /*margin-top:50px;*/ }
 
@@ -55,7 +60,13 @@
   #body .tingle-modal-box {
     max-width: 250px !important; }
     #body .tingle-modal-box .tingle-modal-box__content {
-      padding: 0 25px !important; } }
+      padding: 0 25px !important; }
+
+  .pure-form.email {
+    padding: 0 10px; }
+    .pure-form.email .pure-button {
+      padding: 0  !important;
+      display: border-box; } }
 #globe {
   float: right; }
 
@@ -81,8 +92,7 @@ body#body {
     flex: 1; }
   body#body .pure-form.email {
     display: block;
-    font-size: 1em;
-    padding: 0 10px; }
+    font-size: 1em; }
     body#body .pure-form.email .pure-button {
       background-color: #6400e3;
       color: white;
@@ -160,8 +170,6 @@ header {
 
 .pitch {
   float: left; }
-  .pitch .text, .pitch .email {
-    padding: 0 25px; }
   .pitch h1 {
     font-size: 2em;
     color: #6400e3;

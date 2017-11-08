@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Merriweather|Roboto');
+
 $primary-color: #6400e3;
 $secondary-text-color: #424242;
 $header-font: 'Merriweather', serif;
@@ -68,6 +70,10 @@ $error-color: #f47676;
       flex-flow: column;
     }
   }
+  .text,.email{
+    padding:0 25px !important;
+    display: border-box;
+  }
   .content{
     /*margin-top:50px;*/
   }
@@ -78,6 +84,13 @@ $error-color: #f47676;
     max-width: 250px !important;
     .tingle-modal-box__content{
       padding:0 25px !important;
+    }
+  }
+  .pure-form.email{
+    padding:0 10px;
+    .pure-button{
+      padding: 0  !important;
+      display: border-box;
     }
   }
 }
@@ -113,7 +126,6 @@ body#body{
   .pure-form.email{
     display: block;
     font-size: 1em;
-    padding:0 10px;
 
     .pure-button{
       background-color: $primary-color;
@@ -214,9 +226,7 @@ header{
 
 .pitch {
   float:left;
-  .text,.email{
-    padding:0 25px;
-  }
+
   h1 {
     font-size:2em;
     color: #6400e3;
