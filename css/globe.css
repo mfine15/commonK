@@ -7,11 +7,6 @@
   background-color: white;
   z-index: 2; }
 
-.flyer {
-  stroke-width: 1;
-  opacity: .6;
-  stroke: #6400e3; }
-
 .unfocused {
   stroke: gray; }
 
@@ -28,11 +23,10 @@ h1 {
   margin: 0px; }
 
 p {
-  /* margin-top: 1.2em; */
-  /* margin-bottom: 0.3em; */
+  margin-top: 1.2em;
+  margin-bottom: 0.3em;
   font: 1em Muli;
-  color: #BBB;
-  }
+  color: #BBB; }
 
 controls {
   width: 220px;
@@ -46,7 +40,6 @@ controls {
   stroke-opacity: .5; }
 
 .tingle-modal-box form {
-  /* margin: 0 auto; */
-  }
+  margin: 0 auto; }
 
 /*# sourceMappingURL=globe.css.map */

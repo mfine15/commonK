@@ -63,12 +63,19 @@
       padding: 0 25px !important; }
 
   .pure-form.email {
-    padding: 0 10px; }
+    /*padding:0 10px;*/
+    font-size: 1em !important; }
     .pure-form.email .pure-button {
       padding: 0  !important;
       display: border-box; } }
 #globe {
-  float: right; }
+  float: right;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+  #globe video {
+    margin-top: 50px;
+    width: 100%; }
 
 .email {
   margin: 0 !important; }
@@ -186,7 +193,8 @@ header {
     font-size: 1em;
     line-height: 2em;
     letter-spacing: 0.044em;
-    font-weight: 300; }
+    font-weight: 300;
+    margin-bottom: 30px; }
 
 .colored {
   color: #6400e3; }
