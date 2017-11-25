@@ -107,7 +107,7 @@ body#body {
       border-radius: 0 5px 5px 0;
       padding: 0 10px;
       font-size: 0.85em;
-      margin: 0 0 0 -5px; }
+      margin: 1px 0 0 -5px; }
     body#body .pure-form.email .pure-button:hover {
       background-color: #5900ca; }
     body#body .pure-form.email input {
