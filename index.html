@@ -16,6 +16,15 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/globe.css">
     <link rel="stylesheet" href="css/tingle.css">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-110174968-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-110174968-1');
+    </script>
+
 <!--     <script src="dist/js/main.js"/> -->
 
   </head>
@@ -57,8 +66,8 @@
             </form>
           </div>
           <div class="pure-u-md-11-24 pure-u-1" id="globe">
-            <video autoplay loop playsinline preload defaultMuted webkit-playsinline muted>
-              <source src="globe_3s.mp4" type="video/mp4" />
+            <video  id="globeVideo" poster="preload.jpg" loop playsinline preload defaultMuted webkit-playsinline muted>
+              <source src="globe_3s.mp4"type="video/mp4" />
               Your browser does not support the video tag.
             </video>
 
@@ -124,32 +133,5 @@
   <script src="js/zenscroll-min.js"></script>
   <script src="js/tingle.min.js"></script>
   <script src="js/index.js"></script> 
-  <script src="js/three.min.js"></script>
-  <script src="js/d3.min.js"></script>
-  <script src="js/svg.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.js"></script>
-  <!-- <script src="js/globe.js"></script> -->
-  <!-- <script src="dist/js/main.js"></script> -->
-
-  <!-- <script>
-    var container = document.getElementById( 'globe' );
-    var globe = new DAT.Globe( container );
-    var xhr = new XMLHttpRequest();
-    xhr.open( 'GET', 'data/flight_traffic.json', true );
-    xhr.onreadystatechange = function() {
-      if ( xhr.readyState === 4 && xhr.status === 200 ) {
-        var data = JSON.parse( xhr.responseText );
-        var options = {'format': 'magnitude', 'imgDir': '/'}
-        globe.addData(data, options);
-        globe.addGraticule();
-        globe.animate();
-
-      }
-
-    };
-
-    // Begin request
-    xhr.send( null );
-  </script> -->
 </body>
 </html>

@@ -19,6 +19,9 @@ var modal = new tingle.modal({
     }
 });
 
+document.addEventListener("DOMContentLoaded", function(event) { 
+  document.getElementById('globeVideo').play();
+});
 modal.addFooterBtn('Button label', '', function() {
     // here goes some logic
     modal.close();
